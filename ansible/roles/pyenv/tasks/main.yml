@@ -1,0 +1,28 @@
+---
+
+- name: pyenv source cloned
+  tags:
+    - pyenv
+  git:
+    repo: https://github.com/pyenv/pyenv.git
+    dest: $HOME/.pyenv
+
+- name: pyenv root set
+  tags:
+    - pyenv
+  lineinfile:
+    path: $HOME/.bash_profile
+    regex: '^export PYENV_ROOT='
+    line: 'export PYENV_ROOT="$HOME/.pyenv"'
+    insertafter: EOF
+
+- name: pyenv PATH set
+  tags:
+    - pyenv
+  lineinfile:
+    path: $HOME/.bash_profile
+    regex: '^export PATH=$PYENV_ROOT/'
+    line: 'export PATH="$PYENV_ROOT/bin:$PATH"'
+    insertafter: EOF
+  
+
