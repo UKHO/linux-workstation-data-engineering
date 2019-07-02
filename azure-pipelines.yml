@@ -1,0 +1,13 @@
+stages:
+  - stage: CI
+    jobs:
+      - job: 'ansibleLint'
+        pool:
+          vmImage: 'ubuntu-16.04'
+        steps:
+          - task: UsePythonVersion@0
+            inputs:
+              versionSpec: '3.7'
+          - script: python -m pip install --upgrade ansible-lint
+            displayName: 'Install pip and ansible-lint'
+          - script: ansible-lint ansible/playbook.yml
