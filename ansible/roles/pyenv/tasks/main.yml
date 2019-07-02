@@ -13,7 +13,7 @@
   lineinfile:
     path: /home/{{vm_user}}/.bash_profile
     state: present
-    regex: '^export PYENV_ROOT=/home/{{vm_user}}/.pyenv'
+    regex: ^export PYENV_ROOT=/home/{{vm_user}}/.pyenv
     line: 'export PYENV_ROOT=/home/{{vm_user}}/.pyenv'
     insertafter: EOF
 
@@ -23,7 +23,7 @@
   lineinfile:
     path: /home/{{vm_user}}/.bash_profile
     state: present
-    regex: '^export PATH=/home/{{vm_user}}/.pyenv/bin:{{PATH}}'
+    regex: ^export PATH=/home/{{vm_user}}/.pyenv/bin:{{ lookup('env', 'PATH') }}
     line: 'export PATH=/home/{{vm_user}}/.pyenv/bin:$PATH'
     insertafter: EOF
 
