@@ -5,23 +5,23 @@
     - pyenv
   git:
     repo: https://github.com/pyenv/pyenv.git
-    dest: $HOME/.pyenv
+    dest: /home/{{vm_user}}/.pyenv
 
 - name: pyenv root set
   tags:
     - pyenv
   lineinfile:
-    path: $HOME/.bash_profile
+    path: /home/{{vm_user}}/.bash_profile
     state: present
     regex: '^export PYENV_ROOT='
-    line: 'export PYENV_ROOT="$HOME/.pyenv"'
+    line: 'export PYENV_ROOT="/home/{{vm_user}}/.pyenv"'
     insertafter: EOF
 
 - name: pyenv PATH set
   tags:
     - pyenv
   lineinfile:
-    path: $HOME/.bash_profile
+    path: /home/{{vm_user}}/.bash_profile
     state: present
     regex: '^export PATH=$PYENV_ROOT/'
     line: 'export PATH="$PYENV_ROOT/bin:$PATH"'
