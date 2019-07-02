@@ -1,6 +1,14 @@
 ---
 
-- name: "Docker YUM repo present"
+- name: Docker YUM depencies present
+  yum:
+    name:
+      - yum-utils
+      - device-mapper-persistent-data
+      - lvm2
+    state: present
+
+- name: Docker YUM repo present
   yum_repository:
     name: docker
     description: Docker YUM repo
