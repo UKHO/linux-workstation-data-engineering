@@ -4,5 +4,5 @@
   tags:
     - docker
   yum:
-    state: latest
+    state: present
     name: docker-ce
