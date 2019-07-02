@@ -23,8 +23,8 @@
   lineinfile:
     path: /home/{{vm_user}}/.bash_profile
     state: present
-    regex: '^export PATH=\\$PYENV_ROOT/bin:\\$PATH'
-    line: 'export PATH=$PYENV_ROOT/bin:$PATH'
+    regex: '^export PATH=/home/{{vm_user}}/.pyenv/bin:$PATH'
+    line: 'export PATH=/home/{{vm_user}}/.pyenv/bin:$PATH'
     insertafter: EOF
 
 # - name: pyenv initiated
