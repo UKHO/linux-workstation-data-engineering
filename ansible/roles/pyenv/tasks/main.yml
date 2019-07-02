@@ -12,6 +12,7 @@
     - pyenv
   lineinfile:
     path: $HOME/.bash_profile
+    state: present
     regex: '^export PYENV_ROOT='
     line: 'export PYENV_ROOT="$HOME/.pyenv"'
     insertafter: EOF
@@ -21,8 +22,9 @@
     - pyenv
   lineinfile:
     path: $HOME/.bash_profile
+    state: present
     regex: '^export PATH=$PYENV_ROOT/'
     line: 'export PATH="$PYENV_ROOT/bin:$PATH"'
     insertafter: EOF
-  
+
 
