@@ -1,0 +1,8 @@
+---
+
+- name: Docker present
+  tags:
+    - docker
+  yum:
+    state: latest
+    name: docker-ce
