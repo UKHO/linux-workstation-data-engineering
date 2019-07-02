@@ -1,0 +1,6 @@
+---
+tasks:
+    - name: This is a dummy task
+      yum: 
+                name: zsh
+        state: present
