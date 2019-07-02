@@ -1,5 +1,11 @@
 ---
 
+- name: "Docker YUM repo present"
+  yum_repository:
+    name: docker
+    description: Docker YUM repo
+    baseurl: https://download.docker.com/linux/centos/docker-ce.repo
+
 - name: Docker present
   tags:
     - docker
