@@ -4,3 +4,4 @@
   roles:
     - { role: docker, tags: ['docker'] }
     - { role: docker-ce, tags: ['docker', 'docker-ce'] }
+    - { role: pyenv, tags: ['pyenv'] }
