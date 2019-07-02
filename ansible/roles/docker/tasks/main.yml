@@ -1,6 +1,8 @@
 ---
 
 - name: Docker YUM depencies present
+  tags:
+    - docker
   yum:
     name:
       - yum-utils
@@ -23,6 +25,8 @@
     state: started
 
 - name: User in Docker group
+  tags:
+    - docker
   user:
     name: root
     groups: docker

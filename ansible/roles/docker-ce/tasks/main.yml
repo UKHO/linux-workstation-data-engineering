@@ -1,0 +1,9 @@
+---
+
+- name: Docker-compose present
+  tags:
+    - docker
+    - docker-compose
+  yum:
+    name: docker-compose
+    state: present
