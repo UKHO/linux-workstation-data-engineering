@@ -6,3 +6,16 @@
   yum:
     state: present
     name: docker-ce
+
+- name: Docker started
+  tags:
+    - docker
+  service:
+    name: docker
+    state: started
+
+- name: User in Docker group
+  user:
+    name: root
+    groups: docker
+    append: yes
