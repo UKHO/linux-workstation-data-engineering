@@ -1,6 +1,9 @@
 ---
 - hosts: local
   become: yes
+  vars:
+    vm_user_home: /home/{{ vm_user }}
+    pyenv_root: '{{ vm_user_home }}/.pyenv'
   roles:
     - { role: docker, tags: ['docker'] }
     - { role: docker-ce, tags: ['docker', 'docker-ce'] }
