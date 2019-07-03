@@ -1,6 +1,7 @@
 ---
 
-- vars:
+- name: vars
+  vars:
     vm_user_home: /home/{{ vm_user }}
     pyenv_root: '{{ vm_user_home }}/.pyenv'
 
