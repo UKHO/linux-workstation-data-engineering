@@ -7,6 +7,14 @@
     name: ['yum-utils', 'device-mapper-persistent-data', 'lvm2']
     state: present
 
+- name: Docker YUM repo present
+  tags:
+   - docker
+  yum_repository:
+    name: docker-ce
+    description: Docker-ce YUM repo
+    baseurl: https://download.docker.com/linux/centos/7/x86_64/stable
+
 - name: Docker present
   tags:
     - docker
