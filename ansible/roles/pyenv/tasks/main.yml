@@ -1,7 +1,7 @@
 ---
 
 - name: vars
-  vars:
+  set_fact:
     vm_user_home: /home/{{ vm_user }}
     pyenv_root: '{{ vm_user_home }}/.pyenv'
 
