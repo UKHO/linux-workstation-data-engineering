@@ -11,8 +11,8 @@
   tags:
     - docker
   yum:
+    name: docker-ce
     state: present
-    name: docker-compose
 
 - name: Docker started
   tags:
