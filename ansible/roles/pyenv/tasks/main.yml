@@ -18,6 +18,7 @@
   git:
     repo: https://github.com/pyenv/pyenv.git
     dest: '{{ pyenv_root }}'
+    version: HEAD
 
 - name: pyenv root set
   tags:
@@ -55,3 +56,4 @@
   git:
     repo: https://github.com/pyenv/pyenv-virtualenv.git
     dest: '{{ pyenv_root }}/plugins/pyenv-virtualenv'
+    version: HEAD
