@@ -34,7 +34,7 @@
     path: '{{ vm_user_home }}/.bash_profile'
     state: present
     regex: ^if command -v pyenv
-    line: 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi'
+    line: 'if command -v pyenv 1>/dev/null 2>&1; then\\n  eval "$(pyenv init -)"\\nfi'
     insertafter: EOF
   
 - name: pyenv virtualenv present
