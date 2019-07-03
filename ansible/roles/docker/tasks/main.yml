@@ -4,10 +4,7 @@
   tags:
     - docker
   yum:
-    name:
-      - yum-utils
-      - device-mapper-persistent-data
-      - lvm2
+    name: ['yum-utils', 'device-mapper-persistent-data', 'lvm2']
     state: present
 
 - name: Docker present
