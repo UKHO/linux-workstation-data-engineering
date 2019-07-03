@@ -45,14 +45,9 @@
   lineinfile:
     path: '{{ user_home }}/.bash_profile'
     state: present
-    backrefs: '{{item.backrefs}}'
-    regex: '{{item.regexp}}'
-    line: '{{item.line}}'
+    regex: '^if command -v pyenv 1>/dev/null 2>&1; then eval ".*";fi$'
+    line: 'if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)";fi'
     insertafter: EOF
-  with_items:
-    - {backrefs: no, regexp: 'if command -v pyenv', line: 'if command -v pyenv 1>/dev/null 2>&1; then'}
-    - {backrefs: no, regexp: '  eval \".*\"', line: '  eval "$(pyenv init -)"'}
-    - {backrefs: no, regexp: '  eval \".*\"\nfi', line: 'fi'}
 
 - name: pyenv virtualenv present
   tags:

@@ -6,5 +6,5 @@
     pyenv_root: '{{ user_home }}/.pyenv'
   roles:
     - { role: docker, tags: ['docker'] }
-    - { role: docker-ce, tags: ['docker', 'docker-ce'] }
+    - { role: docker-compose, tags: ['docker', 'docker-compose'] }
     - { role: pyenv, tags: ['pyenv'] }
