@@ -1,31 +1,31 @@
 ---
 
-- name: pyenv source cloned
-  tags:
-    - pyenv
-  git:
-    repo: https://github.com/pyenv/pyenv.git
-    dest: '{{ pyenv_root }}'
-
-- name: pyenv root set
-  tags:
-    - pyenv
-  lineinfile:
-    path: '{{ user_home }}/.bash_profile'
-    state: present
-    regex: ^export PYENV_ROOT={{ pyenv_root }}
-    line: 'export PYENV_ROOT={{ pyenv_root }}'
-    insertafter: EOF
-
-- name: pyenv PATH set
-  tags:
-    - pyenv
-  lineinfile:
-    path: '{{ user_home }}/.bash_profile'
-    state: present
-    regex: ^export PATH={{ pyenv_root }}/bin
-    line: 'export PATH={{ pyenv_root }}/bin:$PATH'
-    insertafter: EOF
+#- name: pyenv source cloned
+#  tags:
+#    - pyenv
+#  git:
+#    repo: https://github.com/pyenv/pyenv.git
+#    dest: '{{ pyenv_root }}'
+#
+#- name: pyenv root set
+#  tags:
+#    - pyenv
+#  lineinfile:
+#    path: '{{ user_home }}/.bash_profile'
+#    state: present
+#    regex: ^export PYENV_ROOT={{ pyenv_root }}
+#    line: 'export PYENV_ROOT={{ pyenv_root }}'
+#    insertafter: EOF
+#
+#- name: pyenv PATH set
+#  tags:
+#    - pyenv
+#  lineinfile:
+#    path: '{{ user_home }}/.bash_profile'
+#    state: present
+#    regex: ^export PATH={{ pyenv_root }}/bin
+#    line: 'export PATH={{ pyenv_root }}/bin:$PATH'
+#    insertafter: EOF
 
 - name: pyenv initiated
   tags:
@@ -33,18 +33,18 @@
   lineinfile:
     path: '{{ user_home }}/.bash_profile'
     state: present
+    backrefs: '{{item.backrefs}}'
     regex: '{{item.regexp}}'
     line: '{{item.line}}'
-    backrefs: yes
     insertafter: EOF
   with_items:
-    - {regexp: '^if command -v pyenv', line: 'if command -v pyenv 1>/dev/null 2>&1; then'}
-    - {regexp: '^  eval \".*\"', line: '  eval "$(pyenv init -)"'}
-    - {regexp: '^  eval \".*\"\nfi', line: 'fi'}
+    - {backrefs: no, regexp: 'if command -v pyenv', line: 'if command -v pyenv 1>/dev/null 2>&1; then'}
+    - {backrefs: no, regexp: '  eval \".*\"', line: '  eval "$(pyenv init -)"'}
+    - {backrefs: yes, regexp: '  eval \".*\"\nfi', line: 'fi'}
   
-- name: pyenv virtualenv present
-  tags:
-    - pyenv
-  git:
-    repo: https://github.com/pyenv/pyenv-virtualenv.git
-    dest: '{{ pyenv_root }}/plugins/pyenv-virtualenv'
+#- name: pyenv virtualenv present
+#  tags:
+#    - pyenv
+#  git:
+#    repo: https://github.com/pyenv/pyenv-virtualenv.git
+#    dest: '{{ pyenv_root }}/plugins/pyenv-virtualenv'
