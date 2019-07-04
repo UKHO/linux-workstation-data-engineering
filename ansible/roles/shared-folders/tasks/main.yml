@@ -1,0 +1,30 @@
+---
+
+- name: shared folders root directory present
+  tags:
+    - shared-folders
+  file:
+    path: "/home/{{ user_name }}/SHARE/"
+    state: directory
+
+- name: vmhgfs-fuse mount point registered
+  tags:
+    - shared-folders
+  shell: "df | grep vmhgfs-fuse"
+  register: vmhgfs_fuse_check
+
+- name: shared root is fused with hgfs
+  tags:
+    - shared-folders
+  command: "vmhgfs-fuse /home/{{ user_name }}/SHARE -o allow_root"
+  when: vmhgfs_fuse_check is failed
+  
+- name: mount shared folders
+  tags:
+    - shared-folders
+  mount:
+    fstype: vmhgfs
+    opts: "defaults,uid={{ user_name }},gid={{ user_name }}"
+    path: "/home/{{ user_name }}/SHARE/"
+    src: ".host:/"
+    state: mounted
