@@ -2,8 +2,8 @@
 
 - name: pyenv depencencies present
   yum:
-    name: ['gcc', 'zlib-devel', 'bzip2', 'bzip2-devel', 'readline-devel', 'sqlite', 'sqlite-devel',
-    'openssl-devel', 'tk-devel', 'libffi-devel']
+    name: ['bzip2','bzip2-devel','gcc','libffi-devel','openssl-devel',
+           'readline-devel','sqlite','sqlite-devel','tk-devel','zlib-devel']
     state: present
 
 - name: pyenv root present
@@ -18,7 +18,7 @@
   git:
     repo: https://github.com/pyenv/pyenv.git
     dest: '{{ pyenv_root }}'
-    version: eb68ec9488f0df1f668e9272dd5bd8854edf1dff
+    version: '{{ pyenv_source_version }}'
 
 - name: pyenv root set
   tags:
@@ -56,4 +56,4 @@
   git:
     repo: https://github.com/pyenv/pyenv-virtualenv.git
     dest: '{{ pyenv_root }}/plugins/pyenv-virtualenv'
-    version: 294f64f76b6b7fbf1a22a4ebba7710faa75c21f7
+    version: '{{ pyenv_virtualenv_source_version }}'
