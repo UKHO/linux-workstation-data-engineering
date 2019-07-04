@@ -19,16 +19,6 @@ if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)";fi
 * Docker Compose
 * Pyenv
 
-## Docker
-
-You may need to add yourself to the Docker group:
-
-```
-$ sudo usermod -aG docker <your username> # Log out and log back in
-$ docker ps # Check you can run a docker command
-CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
-```
-
 ## Pyenv
 
 [Pyenv](https://github.com/pyenv/pyenv) 'lets you easily switch between multiple versions of Python'.
