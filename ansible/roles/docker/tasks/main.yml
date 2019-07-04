@@ -1,0 +1,42 @@
+---
+
+- name: Docker YUM depencies present
+  tags:
+    - docker
+  yum:
+    name: ['device-mapper-persistent-data', 'lvm2', 'yum-utils']
+    state: present
+
+- name: Docker YUM repo present
+  tags:
+   - docker
+  yum_repository:
+    name: docker-ce
+    description: Docker-ce YUM repo
+    baseurl: https://download.docker.com/linux/centos/7/x86_64/stable
+    gpgkey: https://download.docker.com/linux/centos/gpg
+
+- name: Docker present
+  tags:
+    - docker
+  yum:
+    name: docker-ce
+    state: present
+
+- name: Docker started
+  tags:
+    - docker
+  service:
+    name: docker
+    state: started
+
+- name: users in Docker group
+  tags:
+    - docker
+  user:
+    name: '{{ item }}'
+    groups: docker
+    append: yes
+  with_items:
+    - root
+    - '{{ user_name }}'

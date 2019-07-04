@@ -1,1 +1,11 @@
 ---
+- hosts: local
+  become: yes
+  vars:
+    user_name: '{{ user_name }}'
+    user_home: '{{ user_home }}'
+    pyenv_root: '{{ user_home }}/.pyenv'
+  roles:
+    - { role: docker, tags: ['docker'] }
+    - { role: docker-compose, tags: ['docker', 'docker-compose'] }
+    - { role: pyenv, tags: ['pyenv'] }
