@@ -18,6 +18,7 @@ if command -v pyenv 1>/dev/null 2>&1; then eval "$(pyenv init -)";fi
 * Docker
 * Docker Compose
 * Pyenv
+* Shared Folders
 
 ## Pyenv
 
@@ -63,3 +64,7 @@ $ pyenv activate <virtual env name>
 ```
 $ pyenv deactivate
 ```
+
+## Shared Folder
+Any shared folders you have set up in VMWare Player (via VM->Settings->Options->Shared Folders) will appear by default as
+subdirectories under <code>~/SHARE/</code>

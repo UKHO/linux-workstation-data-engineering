@@ -9,3 +9,4 @@
     - { role: docker, tags: ['docker'] }
     - { role: docker-compose, tags: ['docker', 'docker-compose'] }
     - { role: pyenv, tags: ['pyenv'] }
+    - { role: shared-folders, tags: ['shared-folders'] }

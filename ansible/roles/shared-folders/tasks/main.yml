@@ -1,0 +1,56 @@
+---
+
+# NOTE - due to wierdness around permissions of folders shared between the VM and host,
+#        the owner and group directives are necessary, but ignored (directory is created
+#        with owner of root). First run succeeds, subsequent runs fail with a chown error.
+#        Workaround by ignoring these errors.
+- name: shared folders root directory present
+  ignore_errors: True
+  tags:
+    - shared-folders
+  file:
+    group: "{{ user_name }}"
+    mode: 0770
+    owner: "{{ user_name }}"
+    path: "/home/{{ user_name }}/SHARE/"
+    state: directory
+
+- name: fuse configuration present
+  tags:
+    - shared-folders
+  lineinfile:
+    path: '/etc/fuse.conf'
+    state: present
+    regex: ^user_allow_other
+    line: 'user_allow_other'
+    insertafter: EOF
+
+# NOTE - See this issue for more info on HGFS FUSE support with open-vm-tools:
+#        https://github.com/vmware/open-vm-tools/issues/119
+- name: vmhgfs-fuse mount point registered
+  ignore_errors: True
+  tags:
+    - shared-folders
+  shell: df | grep "vmhgfs-fuse"
+  register: vmhgfs_fuse_check
+
+- name: output debug
+  debug: var=vmhgfs_fuse_check
+
+- name: shared root is fused with hgfs
+  become: no
+  ignore_errors: True
+  tags:
+    - shared-folders
+  command: "vmhgfs-fuse /home/{{ user_name }}/SHARE -o subtype=vmhgfs-fuse,allow_other"
+  when: vmhgfs_fuse_check is failed
+
+- name: mount shared folders
+  tags:
+    - shared-folders
+  mount:
+    fstype: vmhgfs
+    opts: "defaults,uid={{ user_name }},gid={{ user_name }}"
+    path: "/home/{{ user_name }}/SHARE"
+    src: ".host:/"
+    state: mounted
