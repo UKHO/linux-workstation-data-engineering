@@ -32,10 +32,10 @@
   shell: df | grep "vmhgfs-fuse"
   register: vmhgfs_fuse_check
 
-- name: output debug>>>>>>> Add shared folders
-  debug: var=vmhgfs_fuse_check>>>>>>> Add shared folders
->>>>>>> Add shared folders
-- name: shared root is fused with>>>>>>> Add shared folders hgfs
+- name: output debug
+  debug: var=vmhgfs_fuse_check
+
+- name: shared root is fused with hgfs
   become: no
   ignore_errors: True
   tags:
