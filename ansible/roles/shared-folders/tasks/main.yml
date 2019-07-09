@@ -25,6 +25,18 @@
     line: 'user_allow_other'
     insertafter: EOF
 
+- name: mount shared folders
+  tags:
+    - shared-folders
+  mount:
+    fstype: vmhgfs
+    opts: "defaults,uid={{ user_name }},gid={{ user_name }}"
+    path: "/home/{{ user_name }}/SHARE"
+    src: ".host:/"
+    state: mounted
+
+# NOTE - See this issue for more info on HGFS FUSE support with open-vm-tools:
+#        https://github.com/vmware/open-vm-tools/issues/119
 - name: vmhgfs-fuse mount point registered
   ignore_errors: True
   tags:
@@ -40,15 +52,5 @@
   ignore_errors: True
   tags:
     - shared-folders
-  command: "vmhgfs-fuse /home/{{ user_name }}/SHARE -o allow_root"
+  command: "vmhgfs-fuse /home/{{ user_name }}/SHARE -o allow_other"
   when: vmhgfs_fuse_check is failed
-  
-- name: mount shared folders
-  tags:
-    - shared-folders
-  mount:
-    fstype: vmhgfs
-    opts: "defaults,uid={{ user_name }},gid={{ user_name }}"
-    path: "/home/{{ user_name }}/SHARE"
-    src: ".host:/"
-    state: mounted
